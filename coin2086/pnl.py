@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 def add_portfolio_purchase_price(trades, initial_purchase_price):
     trades["portfolio_purchase_price"] = 0
     trades.loc[trades["trade_side"] == "BUY", "portfolio_purchase_price"] = (
-        trades["amount"] + trades["fee"]
+        trades["amount"] - trades["fee"]
     )
     trades["portfolio_purchase_price"] = trades["portfolio_purchase_price"].cumsum()
     trades["portfolio_purchase_price"] += initial_purchase_price
